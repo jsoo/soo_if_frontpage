@@ -1,7 +1,7 @@
 <?php
 
 $plugin['name'] = 'soo_if_frontpage';
-$plugin['version'] = '0.1.1';
+$plugin['version'] = '0.1.2';
 $plugin['author'] = 'Jeff Soo';
 $plugin['author_uri'] = 'http://ipsedixit.net/';
 $plugin['description'] = 'Check if page is a section front page';
@@ -20,7 +20,8 @@ function soo_if_frontpage($atts, $thing) {
 	return parse(EvalElse($thing, 
 		( $section ? in_list($pretext['s'], $section) : true ) and
 		( $pg ? $pretext['pg'] < 2 : true ) and
-		empty($pretext['c']) and empty($pretext['q']) and $is_article_list));
+		empty($pretext['c']) and empty($pretext['q']) and empty($pretext['author'])
+		and empty($pretext['month']) and $is_article_list));
 }
 
 # --- END PLUGIN CODE ---
@@ -67,6 +68,8 @@ Similar to the @glx_if_frontpage@ tag from the no-longer-supported " @glx_if@ pl
 * an article list, and;
 * not search results, and;
 * not a listing of articles by category, and;
+* not a listing of articles by author, and;
+* not a listing of articles by month, and;
 * (optionally) in one of the sections listed in the @section@ attribute, and;
 * (optionally) a single-page list or the first page of a multi-page list, if the @pg@ attribute is set.
 
@@ -89,6 +92,10 @@ Whether or not to check for the "pg" URL query param (e.g., @http://my-site.com/
 Set @pg="1"@ to allow only single-page lists or the first page of a multi-page list.
 
 h2. Version History
+
+h3. 0.1.1 (7/2009)
+
+Added author and month search to the conditions to check against
 
 h3. 0.1.1 (7/2009)
 
