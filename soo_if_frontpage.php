@@ -3,7 +3,7 @@
 $plugin['name'] = 'soo_if_frontpage';
 $plugin['version'] = '0.1.2';
 $plugin['author'] = 'Jeff Soo';
-$plugin['author_uri'] = 'http://ipsedixit.net/';
+$plugin['author_uri'] = 'http://ipsedixit.net/txp/';
 $plugin['description'] = 'Check if page is a section front page';
 $plugin['type'] = 0; 
 
@@ -93,7 +93,7 @@ Set @pg="1"@ to allow only single-page lists or the first page of a multi-page l
 
 h2. Version History
 
-h3. 0.1.1 (7/2009)
+h3. 0.1.2 (7/2009)
 
 Added author and month search to the conditions to check against
 
