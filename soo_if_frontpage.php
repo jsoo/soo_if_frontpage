@@ -70,7 +70,7 @@ Similar to the @glx_if_frontpage@ tag from the no-longer-supported " @glx_if@ pl
 * not a listing of articles by category, and;
 * not a listing of articles by author, and;
 * not a listing of articles by month, and;
-* (optionally) in one of the sections listed in the @section@ attribute, and;
+* (optionally) restricted to one of the sections listed in the @section@ attribute, and;
 * (optionally) a single-page list or the first page of a multi-page list, if the @pg@ attribute is set.
 
 h2. Usage
@@ -86,7 +86,7 @@ h3. Attributes
 None %(required)required%.
 
 * @section@ _(Txp section name[s])_
-Comma-separated list of allowed sections.
+Comma-separated list of allowed sections. Leave empty to restrict condition to the default (i.e. home) section. Use @section="*"@ to include all sections.
 * @pg@ _(boolean)_ %(default)default% false
 Whether or not to check for the "pg" URL query param (e.g., @http://my-site.com/?pg=2@).
 Set @pg="1"@ to allow only single-page lists or the first page of a multi-page list.
