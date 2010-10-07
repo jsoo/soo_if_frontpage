@@ -1,7 +1,7 @@
 <?php
 
 $plugin['name'] = 'soo_if_frontpage';
-$plugin['version'] = '0.1.4';
+$plugin['version'] = '0.1.5';
 $plugin['author'] = 'Jeff Soo';
 $plugin['author_uri'] = 'http://ipsedixit.net/txp/';
 $plugin['description'] = 'Check if page is a section front page';
@@ -11,17 +11,27 @@ $plugin['type'] = 0;
 
 # --- BEGIN PLUGIN CODE ---
 
-function soo_if_frontpage($atts, $thing) {
+function soo_if_frontpage ( $atts, $thing )
+{
 	extract(lAtts(array(
 		'section'	=>  '',
 		'pg'		=> false,
 	), $atts));
-	global $pretext, $is_article_list;
+	
+	global $pretext;
+	
+	if ( ! $section ) 
+		$section = 'default';
+		
 	return parse(EvalElse($thing, 
-		( $section ? ( $section == '*' or in_list($pretext['s'], $section) ) : $pretext['s'] == 'default' ) and
-		( $pg ? $pretext['pg'] < 2 : true ) and
-		empty($pretext['c']) and empty($pretext['q']) and empty($pretext['author'])
-		and empty($pretext['month']) and $is_article_list));
+		( $section == '*' or in_list($pretext['s'], $section) ) and
+		( empty($pg) or $pretext['pg'] < 2 ) and
+		empty($pretext['c']) and 
+		empty($pretext['q']) and 
+		empty($pretext['author']) and 
+		empty($pretext['month']) and 
+		empty($pretext['id'])
+	));
 }
 
 # --- END PLUGIN CODE ---
@@ -70,7 +80,7 @@ Similar to the @glx_if_frontpage@ tag from the no-longer-supported " @glx_if@ pl
 * not a listing of articles by category, and;
 * not a listing of articles by author, and;
 * not a listing of articles by month, and;
-* (optionally) restricted to one of the sections listed in the @section@ attribute, and;
+* in one of the sections listed in @section@ (defaults to the 'default' section only), and
 * (optionally) a single-page list or the first page of a multi-page list, if the @pg@ attribute is set.
 
 h2. Usage
@@ -92,6 +102,10 @@ Whether or not to check for the "pg" URL query param (e.g., @http://my-site.com/
 Set @pg="1"@ to allow only single-page lists or the first page of a multi-page list.
 
 h2. Version History
+
+h3. 0.1.5 (10/7/2010)
+
+Documentation update, code cleaning
 
 h3. 0.1.4 (10/6/2010)
 
