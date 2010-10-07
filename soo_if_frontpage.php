@@ -1,7 +1,7 @@
 <?php
 
 $plugin['name'] = 'soo_if_frontpage';
-$plugin['version'] = '0.1.5';
+$plugin['version'] = '0.1.6';
 $plugin['author'] = 'Jeff Soo';
 $plugin['author_uri'] = 'http://ipsedixit.net/txp/';
 $plugin['description'] = 'Check if page is a section front page';
@@ -13,24 +13,20 @@ $plugin['type'] = 0;
 
 function soo_if_frontpage ( $atts, $thing )
 {
-	extract(lAtts(array(
+	$atts = lAtts(array(
 		'section'	=>  '',
 		'pg'		=> false,
-	), $atts));
+	), $atts);
 	
-	global $pretext;
+	global $s, $pg, $c, $q, $author, $month, $id;
 	
-	if ( ! $section ) 
+	if ( ! $section = $atts['section'] ) 
 		$section = 'default';
 		
 	return parse(EvalElse($thing, 
-		( $section == '*' or in_list($pretext['s'], $section) ) and
-		( empty($pg) or $pretext['pg'] < 2 ) and
-		empty($pretext['c']) and 
-		empty($pretext['q']) and 
-		empty($pretext['author']) and 
-		empty($pretext['month']) and 
-		empty($pretext['id'])
+		( $section == '*' or in_list($s, $section) ) and
+		( ! $atts['pg'] or $pg < 2 ) and
+		! ( $c or $q or $author or $month or $id )
 	));
 }
 
@@ -102,6 +98,10 @@ Whether or not to check for the "pg" URL query param (e.g., @http://my-site.com/
 Set @pg="1"@ to allow only single-page lists or the first page of a multi-page list.
 
 h2. Version History
+
+h3. 0.1.6 (10/7/2010)
+
+More code cleaning, after I remembered that @$pretext@ is already extracted in global scope
 
 h3. 0.1.5 (10/7/2010)
 
