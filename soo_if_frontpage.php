@@ -1,7 +1,7 @@
 <?php
 
 $plugin['name'] = 'soo_if_frontpage';
-$plugin['version'] = '0.1.6';
+$plugin['version'] = '0.1.7';
 $plugin['author'] = 'Jeff Soo';
 $plugin['author_uri'] = 'http://ipsedixit.net/txp/';
 $plugin['description'] = 'Check if page is a section front page';
