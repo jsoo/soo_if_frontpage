@@ -65,9 +65,31 @@ div#sed_help .default {color:green;}
 
 h1. soo_if_frontpage
 
-h2. Overview
+ <div id="toc">
+
+h2. Contents
+
+* "Overview":#overview
+* "Usage":#usage
+* "Attributes":#attributes
+* "Examples":#examples
+** "Most restrictive case":#most
+** "Least restrictive case":#least
+* "History":#history
+
+ </div>
+
+h2(#overview). Overview
 
 Similar to the @glx_if_frontpage@ tag from the no-longer-supported " @glx_if@ plugin":http://www.markupartist.com/files/glx_if.txt. Most of @glx_if@'s functionality is now available through core Txp tags, but not this (well, not without an absurd stack of conditional tags). To @glx_if_frontpage@ it adds @txp:else />@ compatibility, and a couple of attributes for more control.
+
+h2(#usage). Usage
+
+pre. <txp:soo_if_frontpage>
+...
+<txp:else />
+...
+</txp:soo_if_frontpage>
 
 @soo_if_frontpage@ evaluates to @true@ if the current page context is:
 
@@ -79,15 +101,7 @@ Similar to the @glx_if_frontpage@ tag from the no-longer-supported " @glx_if@ pl
 * in one of the sections listed in @section@ (defaults to the 'default' section only), and
 * (optionally) a single-page list or the first page of a multi-page list, if the @pg@ attribute is set.
 
-h2. Usage
-
-pre. <txp:soo_if_frontpage>
-...
-<txp:else />
-...
-</txp:soo_if_frontpage>
-
-h3. Attributes
+h3(#attributes). Attributes
 
 None %(required)required%.
 
@@ -97,7 +111,37 @@ Comma-separated list of allowed sections. Leave empty to restrict condition to t
 Whether or not to check for the "pg" URL query param (e.g., @http://my-site.com/?pg=2@).
 Set @pg="1"@ to allow only single-page lists or the first page of a multi-page list.
 
-h2. Version History
+h2(#examples). Examples
+
+h3(#most). Most restrictive case
+
+pre. <txp:soo_if_frontpage pg="1">
+... Home page ONLY
+<txp:else />
+... any other page
+</txp:soo_if_frontpage>
+
+The above example returns true for the home page only. E.g., @http://example.com/@ will cause the tag to return true, but *any other standard Txp URL will return false*.
+
+h3(#least). Least restrictive case
+
+pre. <txp:soo_if_frontpage section="*">
+... Home page, section front page, plus subsequent pages of a paginated list
+<txp:else />
+... Indivdiual articles; category, author, date, or search result lists
+</txp:soo_if_frontpage>
+
+The above example returns true on the home page, any section front page, and any paginated variation thereof. E.g., these pages would all return true:
+* @http://example.com/@
+* @http://example.com/?pg=2@
+* @http://example.com/news/@ (where "news" is a section name)
+* @http://example.com/news/?pg=7@
+
+h2(#history). Version History
+
+h3. 0.1.7 (1/4/2010)
+
+Documentation updated with descriptive examples. _(Thanks to Andre D for the suggestion.)_
 
 h3. 0.1.6 (10/7/2010)
 
