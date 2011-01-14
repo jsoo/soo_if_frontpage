@@ -1,7 +1,7 @@
 <?php
 
 $plugin['name'] = 'soo_if_frontpage';
-$plugin['version'] = '0.1.7';
+$plugin['version'] = '0.1.8';
 $plugin['author'] = 'Jeff Soo';
 $plugin['author_uri'] = 'http://ipsedixit.net/txp/';
 $plugin['description'] = 'Check if page is a section front page';
@@ -18,7 +18,7 @@ function soo_if_frontpage ( $atts, $thing )
 		'pg'		=> false,
 	), $atts);
 	
-	global $s, $pg, $c, $q, $author, $month, $id;
+	global $s, $pg, $c, $q, $author, $month, $id, $p;
 	
 	if ( ! $section = $atts['section'] ) 
 		$section = 'default';
@@ -26,7 +26,7 @@ function soo_if_frontpage ( $atts, $thing )
 	return parse(EvalElse($thing, 
 		( $section == '*' or in_list($s, $section) ) and
 		( ! $atts['pg'] or $pg < 2 ) and
-		! ( $c or $q or $author or $month or $id )
+		! ( $c or $q or $author or $month or $id or $p )
 	));
 }
 
@@ -98,6 +98,7 @@ pre. <txp:soo_if_frontpage>
 * not a listing of articles by category, and;
 * not a listing of articles by author, and;
 * not a listing of articles by month, and;
+* not an image page, and;
 * in one of the sections listed in @section@ (defaults to the 'default' section only), and
 * (optionally) a single-page list or the first page of a multi-page list, if the @pg@ attribute is set.
 
@@ -128,7 +129,7 @@ h3(#least). Least restrictive case
 pre. <txp:soo_if_frontpage section="*">
 ... Home page, section front page, plus subsequent pages of a paginated list
 <txp:else />
-... Indivdiual articles; category, author, date, or search result lists
+... Indivdiual article; individual image; category, author, date, or search result lists
 </txp:soo_if_frontpage>
 
 The above example returns true on the home page, any section front page, and any paginated variation thereof. E.g., these pages would all return true:
@@ -139,7 +140,11 @@ The above example returns true on the home page, any section front page, and any
 
 h2(#history). Version History
 
-h3. 0.1.7 (1/4/2010)
+h3. 0.1.8 (1/14/2011)
+
+Added check for global image context (i.e., the @p@ query parameter)
+
+h3. 0.1.7 (1/4/2011)
 
 Documentation updated with descriptive examples. _(Thanks to Andre D for the suggestion.)_
 
