@@ -1,7 +1,7 @@
 <?php
 
 $plugin['name'] = 'soo_if_frontpage';
-$plugin['version'] = '0.1.8';
+$plugin['version'] = '0.1.9';
 $plugin['author'] = 'Jeff Soo';
 $plugin['author_uri'] = 'http://ipsedixit.net/txp/';
 $plugin['description'] = 'Check if page is a section front page';
@@ -10,6 +10,11 @@ $plugin['type'] = 0;
 @include_once('zem_tpl.php');
 
 # --- BEGIN PLUGIN CODE ---
+
+if(class_exists('\Textpattern\Tag\Registry')) {
+	Txp::get('\Textpattern\Tag\Registry')
+		->register('soo_if_frontpage');
+}
 
 function soo_if_frontpage ( $atts, $thing )
 {
@@ -139,6 +144,10 @@ The above example returns true on the home page, any section front page, and any
 * @http://example.com/news/?pg=7@
 
 h2(#history). Version History
+
+h3. 0.1.9 (2017/02/13)
+
+Txp 4.6 compatibility update
 
 h3. 0.1.8 (1/14/2011)
 
