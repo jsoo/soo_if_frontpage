@@ -1,6 +1,4 @@
 <?php
-
-$plugin['name'] = 'soo_if_frontpage';
 $plugin['version'] = '0.1.9';
 $plugin['author'] = 'Jeff Soo';
 $plugin['author_uri'] = 'http://ipsedixit.net/txp/';

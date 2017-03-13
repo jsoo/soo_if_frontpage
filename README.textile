@@ -22,7 +22,7 @@ notextile. </div>
 
 h2(#overview). Overview
 
-Similar to the @glx_if_frontpage@ tag from the no-longer-supported " @glx_if@ plugin":http://www.markupartist.com/files/glx_if.txt. Most of that functionality is now available through core Txp tags, but not this (well, not without an absurd stack of conditional tags).
+Similar to the @glx_if_frontpage@ tag from the no-longer-supported "@glx_if@ plugin":http://www.markupartist.com/files/glx_if.txt. Most of that functionality is now available through core Txp tags, but not this (well, not without an absurd stack of conditional tags).
 
 h2(#usage). Usage
 
